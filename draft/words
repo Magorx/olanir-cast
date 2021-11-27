@@ -1,0 +1,48 @@
+
++=={spell stack}==+
+|                 |
+|                 |
+|                 |
+|                 |
++=================+
+
+Verbs {
+
+	Create {...} - combine as many {words} from the {phrase} left, up to everything
+	Cast         - takes {spell} from the stack and activates it 
+	Clone        - duplicates top spell on the stack, increasing its mana cost by some coef
+	Chain        - takes all the spells on the stack and creates a casting chain of them, increased cost and cast time,
+				   requires having enough mana for the sum of affected spells to be casted (cant be casted partially)
+}
+
+Adjectives - adjustments {
+	[Elements]
+	[Alignments]
+
+	Activator
+	Caster
+}
+
+Noun - shape {
+	Bolt
+	Orb
+	Explosion
+	Arrow
+
+	Effect
+
+	Golem
+
+	Slash
+	Whip
+}
+
+
+
+		                           Activator (casts next spell on .activate)
+		                               YY
+Fireball: Create (Activator Fire Orb) #-># (Create Fire Explosion Cast) Cast
+
+
+        (Create Fire Explosion) Clone Clone   (Create Caster Fire Orb) Cast // casts fireball and leaves two explosions on stack
+Chain { (Create Fire Explosion) Clone Clone } (Create Caster Fire Orb) Cast // casts three explosions on the orb activation

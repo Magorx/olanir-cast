@@ -1,0 +1,56 @@
+School {
+
+	Trickery
+	Sorcery
+
+	Enchantment
+
+	Conjuration
+	Necromancy
+
+	Ritual
+	Runecasting
+	Alchemy
+
+	Wichcraft
+	Mysticism
+
+	Illusions
+	Control
+
+	World
+}
+
+Alignment {
+	
+	Holy - Dark
+	Inferno - Abyss
+	Nature - Artificial
+	Order - Chaotic
+
+	Absolute
+
+}
+
+Elements {
+
+	Fire - Water
+	Earth - Air
+	Curse - Bless
+	Time - Space
+	Arcane
+
+	Lightning
+	Ice
+	Blood
+	Metal
+	Sand
+
+	Light
+	Mirror
+
+	Dream / Mind
+
+	Essence
+
+}
