@@ -1,0 +1,6 @@
+MP - mana points
+HP - hit points
+
+[Spell]  - a complete magic piece, made out of a [Phrase] and all the needed attributes we extract from it
+[Phrase] - a skeleton of a spell from wich we will try to understand, what the spell does, how many MP costs and etc. Made out of [Words]
+[Word]   - a piece of a pharse describing a particular attributue or behaviour trait.

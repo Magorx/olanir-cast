@@ -1,9 +1,9 @@
 
 +=={spell stack}==+
-|                 |
-|                 |
-|                 |
-|                 |
+|                 Y
+|                 Y
+|                 Y
+|                 Y
 +=================+
 
 Verbs {
@@ -19,29 +19,36 @@ Adjectives - adjustments {
 	[Elements]
 	[Alignments]
 
-	Activator
-	Caster
+	Activator | on .activate casts the phrase defined right after this
+	Caster    | on .activate takes the top spell on the stack and casts it
+
+	Timed
 }
 
 Noun - shape {
-	Bolt
-	Orb
-	Explosion
-	Arrow
+	Bolt       | a basic "fly fastly towards the target" thing
+	Orb        | has radius, floats somewhat slowly if not being pushed 
+	Explosion  | BABOOM
+	Arrow      | physicaly-right arrow to attack your opponent overhead
 
-	Effect
+	Lazer      | a light-speed straight light of attack
+	Blip       | a small piece of lazer flying exetremely fast
 
-	Golem
+	Pulse      | a conus of force
 
-	Slash
-	Whip
+	Effect     | a status-setter, an earth-enchanter or rule-changer
+
+	Golem      | a minion to fight for you
+
+	Slash      | an instant sword-like melee attack
+	Whip	   | a whip-like melee attack
+
+	Wand       | an object to appear beautifully and cast spell after some time
+	Totem      | an obstacle to be a turret, a rule-changer or enchanter for some area
 }
 
 
-
-		                           Activator (casts next spell on .activate)
-		                               YY
-Fireball: Create (Activator Fire Orb) #-># (Create Fire Explosion Cast) Cast
+Fireball: Create (Activator Fire Orb) (Create Fire Explosion Cast) Cast
 
 
         (Create Fire Explosion) Clone Clone   (Create Caster Fire Orb) Cast // casts fireball and leaves two explosions on stack

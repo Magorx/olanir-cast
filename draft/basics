@@ -1,50 +1,55 @@
 School {
 
-	Trickery
-	Sorcery
+	Trickery    | basic spells and stuff to fight and survive with
+	Sorcery     |
 
-	Enchantment
+	Enchantment | effects, weapons upgrades, area effects | overall rule changing
 
-	Conjuration
-	Necromancy
+	Conjuration | minions, AI-run allies, bringing new things from the magic
+	Necromancy  |
 
-	Ritual
-	Runecasting
-	Alchemy
+	Ritual      |
+	Runecasting | items, long and sophisticated ways of cast
+	Alchemy     |
 
-	Wichcraft
-	Mysticism
+	Wichcraft   | unnatural but pleasing for someone sources of magic,
+	Mysticism   | specific ways and rules of cast
 
-	Illusions
-	Control
+	Illusions   | localy rule-changing spells to mess up with opponents
+	Control     |
 
-	World
+	World       | ultra-global spells affecting not only your fight
 }
 
 Alignment {
 	
-	Holy - Dark
-	Inferno - Abyss
-	Nature - Artificial
-	Order - Chaotic
+	Holy    - Dark       | priests and 'good' VS perverts and 'evil'
+	Nature  - Artificial | trees and 'nature' VS made-for-a-purpose and 'crafted'
 
-	Absolute
+	Inferno - Abyss      | deamons and 'fire' VS void beasts and 'nothingness'
+	Order   - Chaotic    | rules and 'strict' VS tohubohu and 'randomness'
+
+	Absolute             | a higher mind, abstract beings
 
 }
 
 Elements {
 
-	Fire - Water
+	Fire  - Water
 	Earth - Air
-	Curse - Bless
-	Time - Space
+
 	Arcane
 
 	Lightning
 	Ice
-	Blood
+
 	Metal
 	Sand
+
+	Curse - Bless
+	Time  - Space
+
+	Blood
 
 	Light
 	Mirror
@@ -52,5 +57,14 @@ Elements {
 	Dream / Mind
 
 	Essence
+
+}
+
+Component {
+	
+	Verbal
+	Somatic
+	Material
+	Сonsciousness
 
 }

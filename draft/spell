@@ -1,0 +1,30 @@
+Spell {
+	
+	Phrase
+
+	Components
+
+	Mana cost
+	Success chance
+
+	Timings {
+		to cast
+		to hold after the cast
+		to live after cast / after hold
+	}
+
+	Controll method
+
+}
+
+Projectile {
+
+	Position formula
+	Speed formula
+
+	Accuracy
+	Weight
+
+	Shape
+
+}
