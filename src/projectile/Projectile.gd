@@ -4,13 +4,18 @@ extends Unit
 class_name Projectile
 
 
+signal fired
+signal hit
+signal hit_unit
+signal lifetime_expired
+signal expired
+
 export var live_time: float = 1
+export var safecast_shift: float = 0
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    print("hi", self.position)
-
     $ExpireTimer.set_wait_time(live_time)
     $ExpireTimer.start()
 
@@ -27,25 +32,42 @@ func _physics_process(delta):
         on_hit(collision)
 
 
-func on_fire(position_ : Vector2, velocity_ : Vector2):
+func on_fire(position_ : Vector2, direction : Vector2):
+    emit_signal("fired")
+
     position = position_
-    velocity = velocity_.normalized() * max_velocity
+    velocity = direction.normalized() * max_velocity
     look_at(position + velocity)
 
 
-func on_hit_unit(unit: Unit):
+func on_hit(collision: KinematicCollision2D):
+    emit_signal("hit", collision)
+    
+#    print("hit: ", (position - collision.collider.position).length())
+#    print("me: ", ($CollisionShape2D.shape as CircleShape2D).radius)
+#    print("him: ", (collision.collider.get_node("CollisionShape2D").shape as CircleShape2D).radius)
+#    print("---- ", (position - collision.position).length())
+#    print("vel ", velocity)
+
     velocity = Vector2(0, 0)
     on_expire()
+    
 
+func on_hit_unit(unit: Unit):
+    emit_signal("hit_unit", unit)
 
-func on_hit(collision):
     velocity = Vector2(0, 0)
     on_expire()
     
 
 func on_lifetime_expire():
+    emit_signal("lifetime_expired")
+
+    velocity = Vector2(0, 0)
     on_expire()
 
 
 func on_expire():
+    emit_signal("expired")
+
     queue_free()

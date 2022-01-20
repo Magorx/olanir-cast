@@ -24,8 +24,8 @@ func _process(delta):
         cur_state.execute(delta)
 
 
-func _physics_process(delta):
-    move_and_slide(velocity)
+func _physics_process(_delta):
+    var _collision = move_and_slide(velocity)
 
 
 func alter_velocity_to(new_velocity):

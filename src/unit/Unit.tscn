@@ -3,6 +3,8 @@
 [ext_resource path="res://unit/Unit.gd" type="Script" id=1]
 
 [node name="Unit" type="KinematicBody2D" groups=["units"]]
+collision_layer = 16
+collision_mask = 529
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true

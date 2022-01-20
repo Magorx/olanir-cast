@@ -7,8 +7,8 @@
 radius = 32.0
 
 [node name="Creature" instance=ExtResource( 2 )]
+collision_layer = 48
 script = ExtResource( 1 )
-max_velocity = 10.0
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )

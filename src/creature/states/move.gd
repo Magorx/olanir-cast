@@ -8,7 +8,7 @@ func _init(unit_, fref_set_state).(unit_, fref_set_state):
     pass
 
 
-func execute(delta):
+func execute(_delta):
     if unit.velocity.x < 0:
         unit.get_node("AnimatedSprite").play("move_left")
     else:

@@ -29,6 +29,36 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://projectile/Projectile.gd"
 }, {
+"base": "Reference",
+"class": "Rune",
+"language": "GDScript",
+"path": "res://magic/rune/rune.gd"
+}, {
+"base": "Rune",
+"class": "RuneCastNext",
+"language": "GDScript",
+"path": "res://magic/rune/collection/rune_cast_next.gd"
+}, {
+"base": "Reference",
+"class": "RuneChain",
+"language": "GDScript",
+"path": "res://magic/rune_chain/rune_chain.gd"
+}, {
+"base": "Rune",
+"class": "RuneSpawnProjectile",
+"language": "GDScript",
+"path": "res://magic/rune/collection/rune_spawn_projectile.gd"
+}, {
+"base": "RuneSpawnProjectile",
+"class": "RuneSpawnTriggerProjectile",
+"language": "GDScript",
+"path": "res://magic/rune/collection/rune_cast_trigger_projectile.gd"
+}, {
+"base": "Reference",
+"class": "Spell",
+"language": "GDScript",
+"path": "res://magic/spell/spell.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Unit",
 "language": "GDScript",
@@ -44,6 +74,12 @@ _global_script_class_icons={
 "CreatureStateIdle": "",
 "CreatureStateMove": "",
 "Projectile": "",
+"Rune": "",
+"RuneCastNext": "",
+"RuneChain": "",
+"RuneSpawnProjectile": "",
+"RuneSpawnTriggerProjectile": "",
+"Spell": "",
 "Unit": "",
 "UnitState": ""
 }
@@ -92,6 +128,19 @@ primary_cast={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="MustBeMasked"
+2d_physics/layer_5="Unit"
+2d_physics/layer_6="Creature"
+2d_physics/layer_10="EnvironmentBlock"
+2d_physics/layer_11="Undestructable"
+2d_physics/layer_12="Furniture"
+2d_physics/layer_14="Decoration"
+2d_physics/layer_16="SpellForm"
+2d_physics/layer_17="Projectile"
+2d_physics/layer_18="AreaEffect"
 
 [physics]
 
