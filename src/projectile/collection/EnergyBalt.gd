@@ -11,8 +11,8 @@ func _ready():
     pass # Replace with function body.
 
 
-func on_fire(position_ : Vector2, velocity_ : Vector2):
-    .on_fire(position_, velocity_)
+func on_fire(caster, position_ : Vector2, velocity_ : Vector2):
+    .on_fire(caster, position_, velocity_)
     $AnimatedSprite.play("idle")
 
 

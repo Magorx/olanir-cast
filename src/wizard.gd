@@ -4,17 +4,17 @@ extends Creature
 const energy_bolt = preload("res://projectile/collection/EnergyBalt.tscn")
 const circle_area = preload("res://area_effect/collection/AreaEffectCircle.tscn")
 
+
 var spell: Spell
 var direction: Vector2
 var cast_radius = 32
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
     spell = Spell.new()
     spell.add_rune(RuneCastNext.new())
     spell.add_rune(RuneSpawnTriggerProjectile.new().set_projectile_type(energy_bolt))
     spell.add_rune(RuneSpawnAreaEffect.new().set_area_type(circle_area))
-    pass # Replace with function body.
 
 
 func _process(_delta):

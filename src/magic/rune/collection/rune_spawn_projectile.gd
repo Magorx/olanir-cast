@@ -12,12 +12,12 @@ func set_projectile_type(type) -> Rune:
     return self
 
 
-func modify_projectile(proj):
+func modify_projectile(_proj):
     pass
 
 
-func on_cast(caster_, position, direction, rune_chain_: RuneChain) -> bool:
-    if not .on_cast(caster_, position, direction, rune_chain_):
+func on_cast(caster, position, direction, rune_chain_: RuneChain) -> bool:
+    if not .on_cast(caster, position, direction, rune_chain_):
         return false
     
     var proj: Projectile = projectile_type.instance()
@@ -29,13 +29,15 @@ func on_cast(caster_, position, direction, rune_chain_: RuneChain) -> bool:
     
     caster.get_parent().add_child(proj)
     
-    proj.connect("fired", self, "on_proj_fire")
-    proj.connect("hit", self, "on_proj_hit")
-    proj.connect("hit_unit", self, "on_proj_hit_unit")
-    proj.connect("lifetime_expired", self, "on_proj_lifetime_expired")
-    proj.connect("expired", self, "on_proj_expired")
+    var _ign = null
+    
+    _ign = proj.connect("fired", self, "on_proj_fire")
+    _ign = proj.connect("hit", self, "on_proj_hit")
+    _ign = proj.connect("hit_unit", self, "on_proj_hit_unit")
+    _ign = proj.connect("lifetime_expired", self, "on_proj_lifetime_expired")
+    _ign = proj.connect("expired", self, "on_proj_expired")
 
-    proj.on_fire(position + shift, direction)
+    proj.on_fire(caster, position + shift, direction)
     
     return true
 
@@ -67,3 +69,10 @@ func shift_projectile_from_caster(proj):
 #        shift += caster.velocity.normalized() * caster.max_velocity * (2 / Engine.iterations_per_second)
     
     return shift
+
+
+func duplicate_no_chain():
+    var dup = .duplicate_no_chain()
+    dup.projectile_type = projectile_type
+    
+    return dup

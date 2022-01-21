@@ -24,7 +24,8 @@ func reset():
 
 func duplicate():
     var dup = get_script().new()
-    dup.data = data.duplicate()
+    for rune in data:
+        dup.add(rune.duplicate_no_chain())
     dup.cur_idx = cur_idx
     
     return dup

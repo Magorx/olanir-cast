@@ -33,7 +33,7 @@ func on_cast(caster_, position, direction, rune_chain_: RuneChain) -> bool:
     _ign = area.connect("expired", self, "on_area_expired")
     
     caster.get_parent().add_child(area)
-    area.on_appear(position, direction)
+    area.on_appear(caster, position, direction)
     
     return true
 
@@ -60,3 +60,10 @@ func on_area_lifetime_end():
 
 func on_area_expired():
     pass
+
+
+func duplicate_no_chain():
+    var dup = .duplicate_no_chain()
+    dup.area_type = area_type
+    
+    return dup

@@ -6,7 +6,10 @@ class_name AreaEffect
 
 export var expire_time: float = 1
 export var tps: int = 5
-export var oneshot: bool = false
+export var one_shot: bool = false
+
+
+var caster
 
 
 signal appeared
@@ -21,18 +24,23 @@ func _ready():
     $ExpireTimer.wait_time = expire_time
     $ExpireTimer.start()
     
-    $TickTimer.wait_time = 1 / max(tps, 1)
+    $TickTimer.wait_time = 1.0 / max(tps, 1)
     $TickTimer.start()
 
 
-func on_appear(pos, dir):
+func on_appear(caster_, pos, _dir):
+    caster = caster_
     position = pos
     emit_signal("appeared")
+    
+    if one_shot:
+        $TickTimer.wait_time = 0
+        $TickTimer.one_shot = true
 
 
 func on_effect_tick():
     emit_signal("effect_tick")
-    if oneshot:
+    if one_shot:
         on_expire()
 
 

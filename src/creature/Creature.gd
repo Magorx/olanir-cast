@@ -4,12 +4,15 @@ extends Unit
 class_name Creature
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+export var max_hp: int = 100
+export var max_mp: int = 10
 
 
-# Called when the node enters the scene tree for the first time.
+var hp = max_hp
+var mp = max_mp
+
+
+
 func _ready():
     pass # Replace with function body.
 

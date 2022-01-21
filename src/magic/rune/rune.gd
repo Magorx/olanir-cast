@@ -11,7 +11,7 @@ func modify_rune(rune):
     return rune
 
 
-func cast(caster_, position, direction, rune_chain_: RuneChain) -> bool:
+func cast(_caster_, _position, _direction, _rune_chain_: RuneChain) -> bool:
     return false
 
 
@@ -34,4 +34,11 @@ func on_end():
     pass
 
 
-
+func duplicate_no_chain():
+    var dup = get_script().new()
+    dup.caster = caster
+    dup.cast_position = cast_position 
+    dup.cast_direction = cast_direction
+    dup.rune_chain = null
+    
+    return dup

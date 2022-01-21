@@ -14,6 +14,9 @@ export var live_time: float = 1
 export var safecast_shift: float = 0
 
 
+var caster
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     $ExpireTimer.set_wait_time(live_time)
@@ -22,7 +25,7 @@ func _ready():
     pass # Replace with function body.
 
 
-func _process(delta):
+func _process(_delta):
     look_at(position + velocity)
 
 
@@ -36,22 +39,18 @@ func _physics_process(delta):
         on_hit(collision)
 
 
-func on_fire(position_ : Vector2, direction : Vector2):
-    emit_signal("fired")
+func on_fire(caster_, position_ : Vector2, direction : Vector2):
+    caster = caster_
 
     position = position_
     velocity = direction.normalized() * max_velocity
     look_at(position + velocity)
+    
+    emit_signal("fired")
 
 
 func on_hit(collision: KinematicCollision2D):
     emit_signal("hit", collision)
-    
-#    print("hit: ", (position - collision.collider.position).length())
-#    print("me: ", ($CollisionShape2D.shape as CircleShape2D).radius)
-#    print("him: ", (collision.collider.get_node("CollisionShape2D").shape as CircleShape2D).radius)
-#    print("---- ", (position - collision.position).length())
-#    print("vel ", velocity)
 
     velocity = Vector2(0, 0)
     on_expire()
