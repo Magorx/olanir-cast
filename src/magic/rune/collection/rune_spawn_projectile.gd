@@ -34,8 +34,6 @@ func on_cast(caster_, position, direction, rune_chain_: RuneChain) -> bool:
     proj.connect("hit_unit", self, "on_proj_hit_unit")
     proj.connect("lifetime_expired", self, "on_proj_lifetime_expired")
     proj.connect("expired", self, "on_proj_expired")
-    
-    print("dist is ", (caster.position - position - shift).length())
 
     proj.on_fire(position + shift, direction)
     
@@ -63,9 +61,7 @@ func on_proj_expired():
 
 
 func shift_projectile_from_caster(proj):
-    print(caster.cast_radius + proj.safecast_shift)
     var shift = cast_direction * (caster.cast_radius + proj.safecast_shift)
-    print(shift)
 
 #    if caster.direction.dot(caster.velocity) > 0:
 #        shift += caster.velocity.normalized() * caster.max_velocity * (2 / Engine.iterations_per_second)

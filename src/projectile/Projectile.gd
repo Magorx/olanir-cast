@@ -22,6 +22,10 @@ func _ready():
     pass # Replace with function body.
 
 
+func _process(delta):
+    look_at(position + velocity)
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
     var collision = move_and_collide(velocity * delta)
