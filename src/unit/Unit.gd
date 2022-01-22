@@ -7,6 +7,10 @@ export var max_velocity: float = 10
 
 var velocity: Vector2 = Vector2(0, 0)
 var input_velocity: Vector2 = Vector2(0, 0)
+
+var last_tick_position: Vector2 = Vector2(0, 0)
+var actual_velocity: Vector2 = Vector2(0, 0)
+
 var is_trying_to_move: bool = false
 
 var team: int = 0
@@ -21,6 +25,7 @@ func _init():
 # Called when the node enters the scene tree for the first time.
 func _ready():
     max_velocity *= GameInfo.TILE_SIZE
+    $ColorModulator.setup(self)
 
 
 func _process(delta):
@@ -28,7 +33,11 @@ func _process(delta):
 
 
 func _physics_process(_delta):
-    var _collision = move_and_slide(velocity)
+    actual_velocity = (position - last_tick_position) / _delta
+    last_tick_position = position
+    
+    if actual_velocity.length() < GameInfo.MIN_VELOCITY:
+        actual_velocity = Vector2(0, 0)
 
 
 func alter_velocity_to(new_velocity):

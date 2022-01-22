@@ -13,7 +13,7 @@ func execute(_delta):
 
     unit.get_node("AnimatedSprite").play("idle")
 
-    if unit.velocity.length_squared() > GameInfo.MIN_VELOCITY_LENGTH_SQUARED:
+    if unit.is_trying_to_move:
         set_state.call_func("move_attack")
     else:
         unit.velocity = Vector2(0, 0)

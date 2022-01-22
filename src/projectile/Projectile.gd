@@ -49,24 +49,29 @@ func on_fire(caster_, position_ : Vector2, direction : Vector2):
     emit_signal("fired")
 
 
+func stop():
+    velocity = Vector2(0, 0)
+    set_deferred("disabled", true)
+
+
 func on_hit(collision: KinematicCollision2D):
     emit_signal("hit", collision)
 
-    velocity = Vector2(0, 0)
+    stop()
     on_expire()
-    
+
 
 func on_hit_unit(unit: Unit):
     emit_signal("hit_unit", unit)
 
-    velocity = Vector2(0, 0)
+    stop()
     on_expire()
-    
+
 
 func on_lifetime_expire():
     emit_signal("lifetime_expired")
 
-    velocity = Vector2(0, 0)
+    stop()
     on_expire()
 
 

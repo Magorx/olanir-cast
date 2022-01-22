@@ -5,7 +5,6 @@ const energy_bolt = preload("res://projectile/collection/EnergyBalt.tscn")
 
 
 export var radius: float = 5
-export var color: Color = Color(255, 255, 255, 255 / 2)
 
 
 var spell: Spell
@@ -35,12 +34,12 @@ func on_effect_tick():
             var dir = unit.position - position
             dir = dir.normalized()
 
-#            body.velocity += dir * 64 * 50
+#            body.velocity += dir * 64 * 25
             
             if body is Creature:
 #                body.set_state("move")
                 
-                body.deal_damage(Damage.new(Damage.Type.energy, 167))
+                body.deal_damage(Damage.new(Damage.Type.fire, 167))
 
     .on_effect_tick()
 

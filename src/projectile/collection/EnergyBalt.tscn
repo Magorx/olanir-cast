@@ -26,10 +26,9 @@ animations = [ {
 [node name="EnergyBalt" instance=ExtResource( 3 )]
 scale = Vector2( 2, 2 )
 script = ExtResource( 4 )
-safecast_shift = 12.0
+safecast_shift = 5.0
 
 [node name="CollisionShape2D" parent="." index="0"]
-rotation = 2.35619
 shape = SubResource( 3 )
 
 [node name="AnimatedSprite" parent="." index="1"]

@@ -19,5 +19,6 @@ func on_fire(caster, position_ : Vector2, velocity_ : Vector2):
 func on_expire():
     $CollisionShape2D.set_deferred("disabled", true)
     $AnimatedSprite.play("boom")
+    stop()
     yield($AnimatedSprite, "animation_finished")
     .on_expire()
