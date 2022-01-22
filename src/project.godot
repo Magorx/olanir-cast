@@ -39,6 +39,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://creature/states/move_release.gd"
 }, {
+"base": "Reference",
+"class": "Damage",
+"language": "GDScript",
+"path": "res://game_info/damage.gd"
+}, {
+"base": "Label",
+"class": "DamageNumber",
+"language": "GDScript",
+"path": "res://utils/damage_numbers/damage_numbers.gd"
+}, {
 "base": "Unit",
 "class": "Projectile",
 "language": "GDScript",
@@ -96,6 +106,8 @@ _global_script_class_icons={
 "CreatureStateMove": "",
 "CreatureStateMoveAttack": "",
 "CreatureStateMoveRelease": "",
+"Damage": "",
+"DamageNumber": "",
 "Projectile": "",
 "Rune": "",
 "RuneCastNext": "",
@@ -116,7 +128,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GameInfo="*res://GameInfo.gd"
+GameInfo="*res://game_info/GameInfo.gd"
 Controller="*res://Controller.gd"
 
 [display]

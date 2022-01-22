@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/theme/basic.tres" type="Theme" id=1]
+[ext_resource path="res://utils/damage_numbers/damage_numbers.gd" type="Script" id=2]
+
+[node name="DamageNumber" type="Label"]
+margin_left = -14.0
+margin_top = -6.0
+margin_right = 14.0
+margin_bottom = 6.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource( 1 )
+text = "12345"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="on_expire"]

@@ -29,17 +29,18 @@ func on_effect_tick():
     for body in bodies:
         if body is Unit:
             var unit: Unit = body as Unit
-            print(unit, caster)
-            if (not caster_team_affected) and unit.team == caster.team:
+            if (not caster_team_affected) and unit.same_team(caster):
                 continue
             
             var dir = unit.position - position
             dir = dir.normalized()
 
-            body.velocity += dir * 64 * 50
+#            body.velocity += dir * 64 * 50
             
             if body is Creature:
-                body.set_state("move")
+#                body.set_state("move")
+                
+                body.deal_damage(Damage.new(Damage.Type.energy, 167))
 
     .on_effect_tick()
 

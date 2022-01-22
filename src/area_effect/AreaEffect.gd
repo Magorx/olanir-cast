@@ -35,7 +35,7 @@ func on_appear(caster_, pos, _dir):
     emit_signal("appeared")
     
     if one_shot:
-        $TickTimer.wait_time = 0
+        $TickTimer.wait_time = GameInfo.EPS
         $TickTimer.one_shot = true
 
 
