@@ -9,9 +9,11 @@ func _init(unit_, fref_set_state).(unit_, fref_set_state):
 
 
 func execute(_delta):
+    .execute(_delta)
+
     unit.get_node("AnimatedSprite").play("idle")
 
     if unit.velocity.length_squared() > GameInfo.MIN_VELOCITY_LENGTH_SQUARED:
-        set_state.call_func("move")
+        set_state.call_func("move_attack")
     else:
         unit.velocity = Vector2(0, 0)

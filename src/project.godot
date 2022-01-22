@@ -29,6 +29,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://creature/states/move.gd"
 }, {
+"base": "UnitState",
+"class": "CreatureStateMoveAttack",
+"language": "GDScript",
+"path": "res://creature/states/move_attack.gd"
+}, {
+"base": "UnitState",
+"class": "CreatureStateMoveRelease",
+"language": "GDScript",
+"path": "res://creature/states/move_release.gd"
+}, {
 "base": "Unit",
 "class": "Projectile",
 "language": "GDScript",
@@ -84,6 +94,8 @@ _global_script_class_icons={
 "Creature": "",
 "CreatureStateIdle": "",
 "CreatureStateMove": "",
+"CreatureStateMoveAttack": "",
+"CreatureStateMoveRelease": "",
 "Projectile": "",
 "Rune": "",
 "RuneCastNext": "",

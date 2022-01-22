@@ -7,6 +7,7 @@ class_name AreaEffect
 export var expire_time: float = 1
 export var tps: int = 5
 export var one_shot: bool = false
+export var caster_team_affected = false
 
 
 var caster

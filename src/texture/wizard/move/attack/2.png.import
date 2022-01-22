@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/1.png-9a1bf9eb506fb26093d440443a4bac21.stex"
+path="res://.import/2.png-708216e1c95ed5f0e0ebcf920334ec61.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://texture/wizard/move_right/1.png"
-dest_files=[ "res://.import/1.png-9a1bf9eb506fb26093d440443a4bac21.stex" ]
+source_file="res://texture/wizard/move/attack/2.png"
+dest_files=[ "res://.import/2.png-708216e1c95ed5f0e0ebcf920334ec61.stex" ]
 
 [params]
 

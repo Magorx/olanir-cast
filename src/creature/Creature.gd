@@ -22,5 +22,7 @@ func init_states():
 
     states["idle"] = CreatureStateIdle.new(self, funcref(self, "set_state"))
     states["move"] = CreatureStateMove.new(self, funcref(self, "set_state"))
+    states["move_release"] = CreatureStateMoveRelease.new(self, funcref(self, "set_state"))
+    states["move_attack"] = CreatureStateMoveAttack.new(self, funcref(self, "set_state"))
 
     set_state("idle")

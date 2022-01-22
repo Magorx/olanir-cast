@@ -9,11 +9,18 @@ func _init(unit_, fref_set_state).(unit_, fref_set_state):
 
 
 func execute(_delta):
-    if unit.velocity.x < 0:
-        unit.get_node("AnimatedSprite").play("move_left")
-    else:
-        unit.get_node("AnimatedSprite").play("move_right")
+    .execute(_delta)
 
-    if unit.velocity.length_squared() < GameInfo.MIN_VELOCITY_LENGTH_SQUARED:
-        unit.velocity = Vector2(0, 0)
-        set_state.call_func("idle")
+    unit.get_node("AnimatedSprite").play("move")
+
+    if unit.velocity.x < 0:
+        unit.get_node("AnimatedSprite").set_flip_h(true)
+    else:
+        unit.get_node("AnimatedSprite").set_flip_h(false)
+
+    if not unit.is_trying_to_move:
+        set_state.call_func("move_release")
+
+
+func get_cast_level() -> int:
+    return GameInfo.CASTING_LEVEL_MOVE
