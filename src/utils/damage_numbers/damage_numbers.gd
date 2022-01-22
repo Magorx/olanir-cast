@@ -15,7 +15,7 @@ func _process(delta):
     rect_position += velocity * delta
 
 
-func setup(position, damage: Damage, expire_time=1):
+func setup(position, damage: Damage):
     text = str(damage.value)
     
     var text_size = get_combined_minimum_size()

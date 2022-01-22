@@ -4,6 +4,9 @@ extends Unit
 class_name Creature
 
 
+export var cast_radius: int = 32
+
+
 var DamageNumbersPacked = preload("res://utils/damage_numbers/damage_numbers.tscn")
 
 
@@ -40,7 +43,7 @@ func deal_damage(damage: Damage):
     
     add_sibling_node(damage_number)
     
-    $ColorModulator.moduate(damage.color, 0.5)
+    $ColorModulator.moduate(damage.color, GameInfo.HIT_HIGHLIGHT_TIME)
 
 
 #func 

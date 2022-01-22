@@ -34,10 +34,11 @@ func on_effect_tick():
             var dir = unit.position - position
             dir = dir.normalized()
 
-#            body.velocity += dir * 64 * 25
+            if not body.get_node("CollisionShape2D").disabled:
+                body.velocity += dir * 64 * 25
             
             if body is Creature:
-#                body.set_state("move")
+                body.is_trying_to_move = true
                 
                 body.deal_damage(Damage.new(Damage.Type.fire, 167))
 

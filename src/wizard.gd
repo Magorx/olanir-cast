@@ -7,7 +7,6 @@ const circle_area = preload("res://area_effect/collection/AreaEffectCircle.tscn"
 
 var spell: Spell
 var direction: Vector2
-var cast_radius = 32
 
 
 func _ready():
