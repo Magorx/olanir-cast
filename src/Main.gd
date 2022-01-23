@@ -10,6 +10,9 @@ extends Node
 func _ready():
     randomize()
     $Controller.set_controlled($Wizard)
+    
+    yield($StartTimer, "timeout")
+    $Wizard.set_state("spawning")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

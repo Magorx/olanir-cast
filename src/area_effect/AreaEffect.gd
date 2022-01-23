@@ -46,7 +46,7 @@ func _ready():
 
 var Dot = preload("res://WhiteDot.tscn")
 
-func get_overlapping_bodies(target_teams_only=true, ignore_obstacles=false):
+func get_overlapping_bodies(target_teams_only=true, force_ignore_obstacles=false):
     var bodies = .get_overlapping_bodies()
     
     var team_filtered_bodies = []
@@ -59,13 +59,11 @@ func get_overlapping_bodies(target_teams_only=true, ignore_obstacles=false):
         team_filtered_bodies = bodies
             
     
-    if ignores_obstacles:
-        return bodies
+    if ignores_obstacles or force_ignore_obstacles:
+        return team_filtered_bodies
     
     var ret = []
     for obj in team_filtered_bodies:
-        var dir = obj.position - position
-        
         var space_state = get_world_2d().direct_space_state
         var intersection = space_state.intersect_ray(position, obj.position)
         

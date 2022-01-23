@@ -26,7 +26,7 @@ func on_cast(caster, position, direction, rune_chain_: RuneChain) -> bool:
     
     var shift = Vector2(0, 0)
     if caster.position == cast_position:
-        shift = shift_projectile_from_caster(proj)
+        shift = shift_projectile_from_caster()
     
     caster.get_parent().add_child(proj)
     
@@ -63,7 +63,7 @@ func on_proj_expired():
     pass
 
 
-func shift_projectile_from_caster(proj):
+func shift_projectile_from_caster():
     var shift = cast_direction * (caster.cast_radius + proj.safecast_shift * 2 + 1)
 
     var dot = caster.direction.dot(caster.actual_velocity.normalized())

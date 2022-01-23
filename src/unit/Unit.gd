@@ -93,7 +93,7 @@ func set_state(name):
     cur_state = state
     cur_state.activate()
     
-#    print("new active state is [", name, "]")
+    print("new active state is [", name, "]")
 
 
 func init_states():

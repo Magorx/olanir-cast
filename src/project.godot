@@ -20,6 +20,16 @@ _global_script_classes=[ {
 "path": "res://creature/Creature.gd"
 }, {
 "base": "UnitState",
+"class": "CreatureStateDead",
+"language": "GDScript",
+"path": "res://creature/states/dead.gd"
+}, {
+"base": "UnitState",
+"class": "CreatureStateDying",
+"language": "GDScript",
+"path": "res://creature/states/dying.gd"
+}, {
+"base": "UnitState",
 "class": "CreatureStateIdle",
 "language": "GDScript",
 "path": "res://creature/states/idle.gd"
@@ -38,6 +48,11 @@ _global_script_classes=[ {
 "class": "CreatureStateMoveRelease",
 "language": "GDScript",
 "path": "res://creature/states/move_release.gd"
+}, {
+"base": "UnitState",
+"class": "CreatureStateSpawning",
+"language": "GDScript",
+"path": "res://creature/states/spawning.gd"
 }, {
 "base": "Reference",
 "class": "Damage",
@@ -102,10 +117,13 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AreaEffect": "",
 "Creature": "",
+"CreatureStateDead": "",
+"CreatureStateDying": "",
 "CreatureStateIdle": "",
 "CreatureStateMove": "",
 "CreatureStateMoveAttack": "",
 "CreatureStateMoveRelease": "",
+"CreatureStateSpawning": "",
 "Damage": "",
 "DamageNumber": "",
 "Projectile": "",
