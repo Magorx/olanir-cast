@@ -27,6 +27,13 @@ const Colors = {
    }
 
 
+func get_color(type_):
+    if type_ in Colors.keys():
+        return Colors[type_]
+    else:
+        return Color(255, 255, 255, 255) / 255
+
+
 class Resistances:
     var value = {
         Type.energy    : 0,
@@ -54,7 +61,7 @@ func _init(type_, value_, color_override=null):
     if color_override:
         color = color_override
     else:
-        color = Colors[type]
+        color = get_color(type)
 
 
 func damage_overriden(damage: int):

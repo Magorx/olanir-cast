@@ -9,7 +9,7 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready():
     randomize()
-    Controller.set_controlled($Creature)
+    $Controller.set_controlled($Creature)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

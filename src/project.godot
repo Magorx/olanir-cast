@@ -129,7 +129,6 @@ config/icon="res://icon.png"
 [autoload]
 
 GameInfo="*res://game_info/GameInfo.gd"
-Controller="*res://Controller.gd"
 
 [display]
 

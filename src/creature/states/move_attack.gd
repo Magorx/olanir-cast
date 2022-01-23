@@ -56,4 +56,4 @@ func next_state():
 
 
 func get_cast_level() -> int:
-    return GameInfo.CASTING_LEVEL_MOVE
+    return GameInfo.CASTING_LEVEL_MOVE_RELEASE_ATTACK
