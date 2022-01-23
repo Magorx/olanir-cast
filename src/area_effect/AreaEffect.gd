@@ -7,11 +7,13 @@ class_name AreaEffect
 export var expire_time: float = 1
 export var tps: int = 5
 export var one_shot: bool = false
-export var caster_team_affected = false
+export var caster_team_affected: bool = false
+export var ignores_obstacles: bool = false
 
 
 var caster
 
+var lightning_z_index
 
 signal appeared
 signal effect_tick
@@ -27,6 +29,74 @@ func _ready():
     
     $TickTimer.wait_time = 1.0 / max(tps, 1)
     $TickTimer.start()
+    
+    if ignores_obstacles:
+        $Light2D.queue_free()
+        $AnimatedSprite.material.set_light_mode(CanvasItemMaterial.LIGHT_MODE_NORMAL)
+    
+    lightning_z_index = GameInfo.get_lightning_z_index()
+    if (!lightning_z_index):
+        $Light2D.enabled = false
+    else:
+#        $Light2D.z_index = lightning_z_index
+        $Light2D.range_z_min = lightning_z_index
+        $Light2D.range_z_max = lightning_z_index
+        $AnimatedSprite.z_index = lightning_z_index
+        $AnimatedSprite.z_as_relative = false
+
+var RD = preload("res://RedDot.tscn")
+
+func get_overlapping_bodies():
+    var bodies = .get_overlapping_bodies()
+    if ignores_obstacles:
+        return bodies
+    
+    var ret = []
+    for obj in bodies:
+        if obj is TileMap:
+            continue
+        
+        print("--- ", obj)
+        var dir = obj.position - position
+        
+        $RayCast2D.cast_to = dir
+        var collider = $RayCast2D.get_collider()
+        if collider:
+            print("bump ", collider)
+
+        if not collider or collider == obj:
+            ret.append(obj)
+        else:
+            
+            var b = RD.instance()
+            b.position = collider.position
+            b.modulate = Color(0.5, 1, 1, 1)
+            obj.get_parent().add_child(b)
+        
+#        var space_state = get_world_2d().direct_space_state
+#        var intersection = space_state.intersect_ray(position, dir)
+#        print("--- ", obj, " pos ", obj.position)
+#
+#        var c = RD.instance()
+#        c.position = obj.position
+#        c.modulate = Color(0, 1, 1, 1)
+#        obj.get_parent().add_child(c)
+#
+#        if (not intersection.keys()) or intersection["collider"] == obj:
+#            ret.append(obj)
+#        else:
+#            print(intersection["collider"])
+#            print((intersection["position"] - position).length(), " ", dir.length())
+#            var a = RD.instance()
+#            a.position = position #intersection["position"]
+#            obj.get_parent().add_child(a)
+#
+#            var b = RD.instance()
+#            b.position = intersection["position"]
+#            b.modulate = Color(0.5, 1, 1, 1)
+#            obj.get_parent().add_child(b)
+    
+    return ret
 
 
 func on_appear(caster_, pos, _dir):
@@ -68,3 +138,7 @@ func _on_AreaEffect_body_entered(body):
         on_unit_enter(body as Unit)
     if body is Creature:
         on_creature_enter(body as Creature)
+
+
+func free():
+    GameInfo.release_lightning_z_index(lightning_z_index)

@@ -5,6 +5,7 @@ class_name RuneSpawnProjectile
 
 
 var projectile_type
+var proj: Projectile
 
 
 func set_projectile_type(type) -> Rune:
@@ -20,7 +21,7 @@ func on_cast(caster, position, direction, rune_chain_: RuneChain) -> bool:
     if not .on_cast(caster, position, direction, rune_chain_):
         return false
     
-    var proj: Projectile = projectile_type.instance()
+    proj = projectile_type.instance()
     modify_projectile(proj)
     
     var shift = Vector2(0, 0)
@@ -37,7 +38,6 @@ func on_cast(caster, position, direction, rune_chain_: RuneChain) -> bool:
     _ign = proj.connect("lifetime_expired", self, "on_proj_lifetime_expired")
     _ign = proj.connect("expired", self, "on_proj_expired")
 
-    print("cast on ", cast_position + shift)
     proj.on_fire(caster, cast_position + shift, cast_direction)
     
     return true

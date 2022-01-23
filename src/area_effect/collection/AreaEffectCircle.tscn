@@ -70,15 +70,18 @@ animations = [ {
 } ]
 
 [node name="AreaEffectCircle" instance=ExtResource( 1 )]
-modulate = Color( 1, 1, 1, 0.784314 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 3 )
 one_shot = true
-radius = 100.0
+radius = 200.0
 
-[node name="CollisionShape2D" parent="." index="0"]
+[node name="RayCast2D" parent="." index="0"]
+collision_mask = 65535
+
+[node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
-[node name="AnimatedSprite" parent="." index="1"]
+[node name="AnimatedSprite" parent="." index="2"]
 frames = SubResource( 2 )
 animation = "boom"
+speed_scale = 0.5
