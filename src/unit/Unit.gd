@@ -93,7 +93,7 @@ func set_state(name):
     cur_state = state
     cur_state.activate()
     
-    print("new active state is [", name, "]")
+#    print("new active state is [", name, "]")
 
 
 func init_states():
@@ -114,4 +114,7 @@ func add_sibling_node(node):
 
 
 func same_team(another) -> bool:
+    if not another is get_script():
+        return false
+
     return team and (team == another.team)

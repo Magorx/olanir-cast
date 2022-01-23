@@ -44,57 +44,33 @@ func _ready():
         $AnimatedSprite.z_index = lightning_z_index
         $AnimatedSprite.z_as_relative = false
 
-var RD = preload("res://RedDot.tscn")
+var Dot = preload("res://WhiteDot.tscn")
 
-func get_overlapping_bodies():
+func get_overlapping_bodies(target_teams_only=true, ignore_obstacles=false):
     var bodies = .get_overlapping_bodies()
+    
+    var team_filtered_bodies = []
+    if target_teams_only and not caster_team_affected:
+        for obj in bodies:
+            if (caster as Unit).same_team(obj):
+                pass
+            team_filtered_bodies.append(obj)
+    else:
+        team_filtered_bodies = bodies
+            
+    
     if ignores_obstacles:
         return bodies
     
     var ret = []
-    for obj in bodies:
-        if obj is TileMap:
-            continue
-        
-        print("--- ", obj)
+    for obj in team_filtered_bodies:
         var dir = obj.position - position
         
-        $RayCast2D.cast_to = dir
-        var collider = $RayCast2D.get_collider()
-        if collider:
-            print("bump ", collider)
-
-        if not collider or collider == obj:
-            ret.append(obj)
-        else:
-            
-            var b = RD.instance()
-            b.position = collider.position
-            b.modulate = Color(0.5, 1, 1, 1)
-            obj.get_parent().add_child(b)
+        var space_state = get_world_2d().direct_space_state
+        var intersection = space_state.intersect_ray(position, obj.position)
         
-#        var space_state = get_world_2d().direct_space_state
-#        var intersection = space_state.intersect_ray(position, dir)
-#        print("--- ", obj, " pos ", obj.position)
-#
-#        var c = RD.instance()
-#        c.position = obj.position
-#        c.modulate = Color(0, 1, 1, 1)
-#        obj.get_parent().add_child(c)
-#
-#        if (not intersection.keys()) or intersection["collider"] == obj:
-#            ret.append(obj)
-#        else:
-#            print(intersection["collider"])
-#            print((intersection["position"] - position).length(), " ", dir.length())
-#            var a = RD.instance()
-#            a.position = position #intersection["position"]
-#            obj.get_parent().add_child(a)
-#
-#            var b = RD.instance()
-#            b.position = intersection["position"]
-#            b.modulate = Color(0.5, 1, 1, 1)
-#            obj.get_parent().add_child(b)
+        if (not intersection.keys()) or intersection["collider"] == obj:
+            ret.append(obj)
     
     return ret
 
@@ -140,5 +116,5 @@ func _on_AreaEffect_body_entered(body):
         on_creature_enter(body as Creature)
 
 
-func free():
+func _exit_tree():
     GameInfo.release_lightning_z_index(lightning_z_index)

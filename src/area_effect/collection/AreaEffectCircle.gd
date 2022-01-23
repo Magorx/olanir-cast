@@ -11,7 +11,7 @@ var spell: Spell
 
 
 func _ready():
-    scale.x = 2 * radius / $AnimatedSprite.frames.get_frame("default", 0).get_size().x
+    scale.x = radius / $AnimatedSprite.frames.get_frame("default", 0).get_size().x
     scale.y = scale.x
     
     spell = Spell.new()
