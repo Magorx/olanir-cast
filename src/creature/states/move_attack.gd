@@ -26,7 +26,7 @@ func execute(delta):
     if not executed:
         unit.get_node("AnimatedSprite").play("move_attack")
         
-        attack_start_velocity = unit.velocity
+        attack_start_velocity = unit.actual_velocity
         move_attack_time = unit.get_node("Stats").move_attack_time
         max_velocity = Vector2(unit.max_velocity, unit.max_velocity)
 
@@ -40,13 +40,16 @@ func execute(delta):
     
     .execute(delta)
     
+    unit.face_towards_velocity()
+    
     cur_target_velocity = max_velocity * unit.input_velocity
-    unit.set_velocity(lerp(cur_target_velocity, attack_start_velocity, linear_coef_formula(timer.time_left)), true)
+    print(attack_start_velocity)
+    unit.set_velocity(lerp(attack_start_velocity, cur_target_velocity, linear_coef_formula(1 - timer.time_left / move_attack_time)), true)
 
 
 func linear_coef_formula(t):
-    var c = t / move_attack_time
-    return c * c
+    t = t
+    return t
 
 
 func next_state():

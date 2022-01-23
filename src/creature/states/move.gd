@@ -9,17 +9,19 @@ func _init(unit_, fref_set_state).(unit_, fref_set_state):
 
 
 func execute(_delta):
-    .execute(_delta)
-
-    unit.get_node("AnimatedSprite").play("move")
-
-    if unit.velocity.x < 0:
-        unit.get_node("AnimatedSprite").set_flip_h(true)
-    else:
-        unit.get_node("AnimatedSprite").set_flip_h(false)
-
     if not unit.is_trying_to_move:
         set_state.call_func("move_release")
+        unit.cur_state.execute(_delta)
+        return
+    
+    if not executed:
+        unit.get_node("AnimatedSprite").play("move")
+    
+    .execute(_delta)
+    
+    unit.velocity = unit.input_velocity * unit.max_velocity
+
+    unit.face_towards_velocity()
 
 
 func get_cast_level() -> int:

@@ -57,8 +57,27 @@ func process_input():
     
     is_trying_to_move = vel.length_squared() != 0
     input_velocity = vel
+    
+    vel = vel * max_velocity
+    
+    if vel.length() < GameInfo.MIN_VELOCITY:
+        vel = Vector2(0, 0)
 
-    alter_velocity_to(vel * max_velocity)
+
+func face_towards(vector):
+    if vector.x < 0:
+        $AnimatedSprite.set_flip_h(true)
+    else:
+        $AnimatedSprite.set_flip_h(false)
+
+
+func face_towards_mouse():
+    var to_mouse = get_global_mouse_position() - position
+    face_towards(to_mouse)
+
+
+func face_towards_velocity():
+    face_towards(velocity)
 
 
 # States

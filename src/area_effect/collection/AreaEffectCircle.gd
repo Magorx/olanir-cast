@@ -38,7 +38,7 @@ func on_effect_tick():
                 body.velocity += dir * 64 * 25
             
             if body is Creature:
-                body.is_trying_to_move = true
+                body.set_state("move")
                 
                 body.deal_damage(Damage.new(Damage.Type.fire, 167))
 

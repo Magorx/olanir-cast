@@ -37,11 +37,13 @@ func execute(delta):
     
     .execute(delta)
     
-    unit.set_velocity(lerp(Vector2(0, 0), release_start_velocity, linear_coef_formula(timer.time_left)), true)
+    unit.face_towards_velocity()
+    
+    unit.set_velocity(lerp(release_start_velocity, Vector2(0, 0), linear_coef_formula(1 - timer.time_left / move_release_time)), true)
 
 
 func linear_coef_formula(t):
-    var c = t / move_release_time
+    var c = t
     return c
 
 
