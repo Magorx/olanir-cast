@@ -29,6 +29,7 @@ func get_preloaded_interface(name):
 func switch_to(interface_name, to_reset_stack=true, to_stack_add=true):
     var pk_interface = get_preloaded_interface(interface_name)
     if not pk_interface:
+        printerr("Can't find preload menu [", interface_name, "]")
         return
     
     if to_reset_stack:
@@ -51,7 +52,6 @@ func ascend():
 
     menu_stack.pop_back()
 
-    print("swiching")
     switch_to(menu_stack.back(), false, false)
     
 

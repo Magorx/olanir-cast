@@ -2,13 +2,16 @@
 
 [ext_resource path="res://menus/template/Template.tscn" type="PackedScene" id=1]
 [ext_resource path="res://menus/matchmaking/Matchmaking.gd" type="Script" id=2]
-[ext_resource path="res://resources/shortcuts/choose_native.tres" type="ShortCut" id=3]
+[ext_resource path="res://menus/descend_button/DescendButton.tscn" type="PackedScene" id=3]
 
 [node name="Matchmaking" instance=ExtResource( 1 )]
 rect_pivot_offset = Vector2( -214, -42 )
 script = ExtResource( 2 )
 
-[node name="JoinButton" type="Button" parent="." index="1"]
+[node name="TitleLabel" parent="." index="1"]
+text = "matchmaking"
+
+[node name="JoinDescendButton" parent="." index="2" instance=ExtResource( 3 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -17,24 +20,17 @@ margin_left = -44.0
 margin_top = -27.0
 margin_right = 44.0
 margin_bottom = 27.0
-focus_mode = 0
-shortcut_in_tooltip = false
-enabled_focus_mode = 0
-shortcut = ExtResource( 3 )
 text = "Join"
+menu_name = "matchmaking_join"
 
-[node name="HostButton" type="Button" parent="." index="2"]
-margin_left = 466.0
-margin_top = 351.0
-margin_right = 558.0
-margin_bottom = 405.0
-focus_mode = 0
-shortcut_in_tooltip = false
-enabled_focus_mode = 0
+[node name="HostDescendButton2" parent="." index="3" instance=ExtResource( 3 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -46.0
+margin_top = 50.0
+margin_right = 46.0
+margin_bottom = 27.0
 text = "Host"
-
-[node name="TitleLabel" parent="." index="3"]
-text = "matchmaking"
-
-[connection signal="pressed" from="JoinButton" to="." method="_on_JoinButton_pressed"]
-[connection signal="pressed" from="HostButton" to="." method="_on_HostButton_pressed"]
+menu_name = "matchmaking_host"

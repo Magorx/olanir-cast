@@ -55,10 +55,5 @@ func deal_damage(damage: Damage):
     $ColorModulator.moduate(damage.color, GameInfo.HIT_HIGHLIGHT_TIME)
     
     if $Stats.hp <= 0:
-        die()
+        set_state("dying")
 
-
-func die():
-    set_state("dying")
-    cur_state.execute(0)
-    pass
