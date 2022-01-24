@@ -12,62 +12,67 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "AreaEffect",
 "language": "GDScript",
-"path": "res://area_effect/AreaEffect.gd"
+"path": "res://magic/spell_form/area_effect/AreaEffect.gd"
 }, {
 "base": "Unit",
 "class": "Creature",
 "language": "GDScript",
-"path": "res://creature/Creature.gd"
+"path": "res://actors/creature/Creature.gd"
 }, {
 "base": "UnitState",
 "class": "CreatureStateDead",
 "language": "GDScript",
-"path": "res://creature/states/dead.gd"
+"path": "res://actors/creature/states/dead.gd"
 }, {
 "base": "UnitState",
 "class": "CreatureStateDying",
 "language": "GDScript",
-"path": "res://creature/states/dying.gd"
+"path": "res://actors/creature/states/dying.gd"
 }, {
 "base": "UnitState",
 "class": "CreatureStateIdle",
 "language": "GDScript",
-"path": "res://creature/states/idle.gd"
+"path": "res://actors/creature/states/idle.gd"
 }, {
 "base": "UnitState",
 "class": "CreatureStateMove",
 "language": "GDScript",
-"path": "res://creature/states/move.gd"
+"path": "res://actors/creature/states/move.gd"
 }, {
 "base": "UnitState",
 "class": "CreatureStateMoveAttack",
 "language": "GDScript",
-"path": "res://creature/states/move_attack.gd"
+"path": "res://actors/creature/states/move_attack.gd"
 }, {
 "base": "UnitState",
 "class": "CreatureStateMoveRelease",
 "language": "GDScript",
-"path": "res://creature/states/move_release.gd"
+"path": "res://actors/creature/states/move_release.gd"
 }, {
 "base": "UnitState",
 "class": "CreatureStateSpawning",
 "language": "GDScript",
-"path": "res://creature/states/spawning.gd"
+"path": "res://actors/creature/states/spawning.gd"
 }, {
 "base": "Reference",
 "class": "Damage",
 "language": "GDScript",
-"path": "res://game_info/damage.gd"
+"path": "res://utils/damage/damage.gd"
 }, {
 "base": "Label",
 "class": "DamageNumber",
 "language": "GDScript",
 "path": "res://utils/damage_numbers/damage_numbers.gd"
 }, {
+"base": "Node2D",
+"class": "Level",
+"language": "GDScript",
+"path": "res://base_scenes/level/Level.gd"
+}, {
 "base": "Unit",
 "class": "Projectile",
 "language": "GDScript",
-"path": "res://projectile/Projectile.gd"
+"path": "res://magic/spell_form/projectile/Projectile.gd"
 }, {
 "base": "Reference",
 "class": "Rune",
@@ -99,6 +104,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://magic/rune/collection/rune_cast_trigger_projectile.gd"
 }, {
+"base": "Area2D",
+"class": "SpawnArea",
+"language": "GDScript",
+"path": "res://base_scenes/level/spawn_area/SpawnArea.gd"
+}, {
 "base": "Reference",
 "class": "Spell",
 "language": "GDScript",
@@ -107,12 +117,12 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Unit",
 "language": "GDScript",
-"path": "res://unit/Unit.gd"
+"path": "res://actors/unit/Unit.gd"
 }, {
 "base": "Reference",
 "class": "UnitState",
 "language": "GDScript",
-"path": "res://unit/state_machine/state.gd"
+"path": "res://actors/unit/state_machine/state.gd"
 } ]
 _global_script_class_icons={
 "AreaEffect": "",
@@ -126,6 +136,7 @@ _global_script_class_icons={
 "CreatureStateSpawning": "",
 "Damage": "",
 "DamageNumber": "",
+"Level": "",
 "Projectile": "",
 "Rune": "",
 "RuneCastNext": "",
@@ -133,6 +144,7 @@ _global_script_class_icons={
 "RuneSpawnAreaEffect": "",
 "RuneSpawnProjectile": "",
 "RuneSpawnTriggerProjectile": "",
+"SpawnArea": "",
 "Spell": "",
 "Unit": "",
 "UnitState": ""
@@ -146,12 +158,17 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GameInfo="*res://game_info/GameInfo.gd"
+GameInfo="*res://globals/GameInfo.gd"
+Game="*res://globals/Game.gd"
 
 [display]
 
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[global]
+
+level=false
 
 [importer_defaults]
 
@@ -208,11 +225,20 @@ primary_cast={
 
 [layer_names]
 
+2d_render/layer_1="MustBeMasked"
+2d_render/layer_2="Back"
+2d_render/layer_3="Middle"
+2d_render/layer_4="Front"
+2d_render/layer_5="LightAnimationsZ"
+2d_render/layer_10="EnvironmentBlock"
 2d_physics/layer_1="MustBeMasked"
+2d_physics/layer_2="Back"
+2d_physics/layer_3="Middle"
+2d_physics/layer_4="Front"
 2d_physics/layer_5="Unit"
 2d_physics/layer_6="Creature"
 2d_physics/layer_10="EnvironmentBlock"
-2d_physics/layer_11="Undestructable"
+2d_physics/layer_11="Indestructable"
 2d_physics/layer_12="Furniture"
 2d_physics/layer_14="Decoration"
 2d_physics/layer_16="SpellForm"

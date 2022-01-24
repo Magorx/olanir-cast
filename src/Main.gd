@@ -1,20 +1,16 @@
 extends Node
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var pk_wizard = preload("res://wizard.tscn")
+var pk_arena1 = preload("res://collection/levels/Arena1.tscn")
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
     randomize()
-    $Controller.set_controlled($Wizard)
     
-    yield($StartTimer, "timeout")
-    $Wizard.set_state("spawning")
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#    pass
+    var level = Game.load_level(pk_arena1)
+    
+    level.add_controlled_creature(pk_wizard, 1)
+    
+    add_child(level)
+    

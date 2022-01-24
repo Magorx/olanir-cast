@@ -1,8 +1,8 @@
 extends Creature
 
 
-const energy_bolt = preload("res://projectile/collection/EnergyBalt.tscn")
-const circle_area = preload("res://area_effect/collection/AreaEffectCircle.tscn")
+const energy_bolt = preload("res://magic/spell_form/projectile/collection/EnergyBalt.tscn")
+const circle_area = preload("res://magic/spell_form/area_effect/collection/AreaEffectCircle.tscn")
 
 
 var spell: Spell
@@ -24,6 +24,6 @@ func process_input():
     .process_input()
     
     if Input.is_action_pressed("primary_cast"):
-        if $ReloadTimer.is_stopped():
+        if $ReloadTimer.is_stopped() and cur_state.can_cast():
             var __ = spell.cast(self, position, direction)
             $ReloadTimer.start()

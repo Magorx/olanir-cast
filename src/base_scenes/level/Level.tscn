@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://base_scenes/level/Level.gd" type="Script" id=1]
+[ext_resource path="res://resources/tileset/arena/back.tres" type="TileSet" id=2]
+[ext_resource path="res://resources/tileset/arena/middle.tres" type="TileSet" id=3]
+[ext_resource path="res://resources/texture/tiles/front.png" type="Texture" id=4]
+
+[sub_resource type="TileSet" id=1]
+0/name = "front.png 0"
+0/texture = ExtResource( 4 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[node name="Level" type="Node2D" groups=["levels"]]
+script = ExtResource( 1 )
+
+[node name="BackgroundSprite" type="Sprite" parent="."]
+
+[node name="Tilemaps" type="Node" parent="."]
+
+[node name="Back" type="TileMap" parent="Tilemaps"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 16777218
+occluder_light_mask = 2
+format = 1
+
+[node name="Middle" type="TileMap" parent="Tilemaps"]
+scale = Vector2( 2, 2 )
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 33554948
+occluder_light_mask = 532
+format = 1
+
+[node name="Front" type="TileMap" parent="Tilemaps"]
+z_index = 255
+tile_set = SubResource( 1 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 67108872
+occluder_light_mask = 8
+format = 1
+
+[node name="SpawnAreas" type="Node" parent="."]
+
+[node name="EffectAreas" type="Node" parent="."]
+
+[node name="Creatures" type="Node" parent="."]
+
+[node name="Controllers" type="Node" parent="."]
