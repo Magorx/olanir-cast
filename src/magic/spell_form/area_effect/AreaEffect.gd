@@ -114,7 +114,7 @@ func _on_AreaEffect_body_entered(body):
         on_creature_enter(body as Creature)
 
 
-func _on_AreaEffect_area_entered(body):
+func _on_AreaEffect_area_entered(_area):
     pass
 
 
