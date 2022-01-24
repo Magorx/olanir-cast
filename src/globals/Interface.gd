@@ -15,7 +15,7 @@ var preloaded = {
 
 
 func _ready():
-    switch_to("main_menu")
+    switch_to("matchmaking_host")
 
 
 
@@ -56,9 +56,25 @@ func ascend():
     
 
 func set_current(pk_interface):
-    if current:
-        current.queue_free()
-        current = null
+    clear_current()
 
     current = pk_interface.instance()
     add_child(current)
+
+
+func clear_current():
+    if not current:
+        return
+    
+    current.queue_free()
+    current = null
+
+
+#func focus():
+#    var parent = get_parent()
+##    parent.move_child(self, 0)
+#    parent.move_child(self, parent.get_child_count() + 1)
+
+
+func add(something):
+    add_child(something)
