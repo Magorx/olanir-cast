@@ -49,3 +49,5 @@ func add_controlled_creature(pk_creature, team=0):
     $Controllers.add_child(controller)
     
     creature.set_state("dead")
+    
+    return controller

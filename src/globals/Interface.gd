@@ -7,15 +7,17 @@ var menu_stack = []
 
 
 var preloaded = {
-    "main_menu" : preload("res://menus/main_menu/MainMenu.tscn"),
-    "matchmaking" : preload("res://menus/matchmaking/Matchmaking.tscn"),
-    "matchmaking_join" : preload("res://menus/matchmaking_join/MatchmakingJoin.tscn"),
-    "matchmaking_host" : preload("res://menus/matchmaking_host/MatchmakingHost.tscn")
+    "main_menu"                 : preload("res://menus/main_menu/MainMenu.tscn"),
+    "matchmaking"               : preload("res://menus/matchmaking/Matchmaking.tscn"),
+    "matchmaking_join"          : preload("res://menus/matchmaking_join/MatchmakingJoin.tscn"),
+    "matchmaking_host"          : preload("res://menus/matchmaking_host/MatchmakingHost.tscn"),
+    
+    "ingame_hud"                : preload("res://menus/ingame_hud/IngameHUD.tscn")
    }
 
 
 func _ready():
-    switch_to("main_menu")
+    switch_to("matchmaking_host")
 
 
 
@@ -56,9 +58,25 @@ func ascend():
     
 
 func set_current(pk_interface):
-    if current:
-        current.queue_free()
-        current = null
+    clear_current()
 
     current = pk_interface.instance()
     add_child(current)
+
+
+func clear_current():
+    if not current:
+        return
+    
+    current.queue_free()
+    current = null
+
+
+#func focus():
+#    var parent = get_parent()
+##    parent.move_child(self, 0)
+#    parent.move_child(self, parent.get_child_count() + 1)
+
+
+func add(something):
+    add_child(something)

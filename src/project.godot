@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://magic/spell_form/area_effect/AreaEffect.gd"
 }, {
+"base": "Node2D",
+"class": "Controller",
+"language": "GDScript",
+"path": "res://utils/controller/Controller.gd"
+}, {
 "base": "Unit",
 "class": "Creature",
 "language": "GDScript",
@@ -117,7 +122,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "TemplateMenu",
 "language": "GDScript",
-"path": "res://menus/template/Template.gd"
+"path": "res://menus/template/TemplateControl.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Unit",
@@ -131,6 +136,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AreaEffect": "",
+"Controller": "",
 "Creature": "",
 "CreatureStateDead": "",
 "CreatureStateDying": "",
