@@ -15,3 +15,4 @@ func load_level(name):
     Game.load_level(pk_level)
     Game.add_local_player()
 
+    Interface.switch_to("ingame_hud")

@@ -7,10 +7,12 @@ var menu_stack = []
 
 
 var preloaded = {
-    "main_menu" : preload("res://menus/main_menu/MainMenu.tscn"),
-    "matchmaking" : preload("res://menus/matchmaking/Matchmaking.tscn"),
-    "matchmaking_join" : preload("res://menus/matchmaking_join/MatchmakingJoin.tscn"),
-    "matchmaking_host" : preload("res://menus/matchmaking_host/MatchmakingHost.tscn")
+    "main_menu"                 : preload("res://menus/main_menu/MainMenu.tscn"),
+    "matchmaking"               : preload("res://menus/matchmaking/Matchmaking.tscn"),
+    "matchmaking_join"          : preload("res://menus/matchmaking_join/MatchmakingJoin.tscn"),
+    "matchmaking_host"          : preload("res://menus/matchmaking_host/MatchmakingHost.tscn"),
+    
+    "ingame_hud"                : preload("res://menus/ingame_hud/IngameHUD.tscn")
    }
 
 

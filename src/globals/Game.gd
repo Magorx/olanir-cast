@@ -3,7 +3,9 @@ extends Node
 
 var AVAILABLE_LIGHTNING_Z_INDEX = []
 
-var current_level: Level
+var current_level: Level = null
+var current_controller: Controller = null
+var local_player = null
 
 
 var pk_wizard = preload("res://wizard.tscn")
@@ -60,4 +62,8 @@ func add_local_player(team=1):
     if not current_level:
         printerr("add_local_player is called when there is no loaded level")
     
-    current_level.add_controlled_creature(pk_wizard, team)
+    current_controller = current_level.add_controlled_creature(pk_wizard, team)
+
+
+func get_current_controller() -> Controller:
+    return current_controller
