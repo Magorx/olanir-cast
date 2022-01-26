@@ -1,7 +1,7 @@
 # this is just an example of what area could be
 extends AreaEffect
 
-const energy_bolt = preload("res://magic/spell_form/projectile/collection/EnergyBalt.tscn")
+const energy_bolt = "res://magic/spell_form/projectile/collection/EnergyBalt.tscn"
 
 
 export var radius: float = 5

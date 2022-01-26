@@ -34,7 +34,6 @@ shadow_enabled = true
 shadow_item_cull_mask = 533
 
 [connection signal="area_entered" from="." to="." method="_on_AreaEffect_area_entered"]
-[connection signal="area_shape_entered" from="." to="." method="_on_AreaEffect_area_shape_entered"]
 [connection signal="body_entered" from="." to="." method="_on_AreaEffect_body_entered"]
 [connection signal="timeout" from="TickTimer" to="." method="on_effect_tick"]
 [connection signal="timeout" from="ExpireTimer" to="." method="on_lifetime_end"]

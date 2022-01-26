@@ -16,6 +16,7 @@ extents = Vector2( 65, 128.5 )
 extents = Vector2( 111, 64.5 )
 
 [node name="Arena1" instance=ExtResource( 1 )]
+in_game_name = "Arena1"
 
 [node name="Back" parent="Tilemaps" index="0"]
 scale = Vector2( 2, 2 )

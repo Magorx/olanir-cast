@@ -1,7 +1,7 @@
 extends Creature
 
 
-const energy_bolt = preload("res://magic/spell_form/projectile/collection/EnergyBalt.tscn")
+const energy_bolt = "res://magic/spell_form/projectile/collection/EnergyBalt.tscn"
 const circle_area = preload("res://magic/spell_form/area_effect/collection/AreaEffectCircle.tscn")
 
 

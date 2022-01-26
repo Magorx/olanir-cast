@@ -24,5 +24,16 @@ const MAX_LIGHTNING_Z_INDEX = 100
 const MAX_SPAWN_ATTEMPTS = 20
 
 
+const TEAM_AUTOCHOICE = -1
+
+
+const LEVEL_EXTENSION = ".tscn"
+
+
+const CREATURES = {
+    "wizard" : preload("res://wizard.tscn")
+   }
+
+
 func _ready():
     pass

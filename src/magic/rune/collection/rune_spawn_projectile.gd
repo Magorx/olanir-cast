@@ -4,7 +4,7 @@ extends Rune
 class_name RuneSpawnProjectile
 
 
-var projectile_type
+var projectile_type: String
 var proj: Projectile
 
 
@@ -21,14 +21,16 @@ func on_cast(caster, position, direction, rune_chain_: RuneChain) -> bool:
     if not .on_cast(caster, position, direction, rune_chain_):
         return false
     
-    proj = projectile_type.instance()
+    var shared_proj = Network.SharedNode.new(projectile_type, caster.get_parent())
+    proj = shared_proj.node
+
     modify_projectile(proj)
     
     var shift = Vector2(0, 0)
     if caster.position == cast_position:
         shift = shift_projectile_from_caster()
     
-    caster.get_parent().add_child(proj)
+#    caster.get_parent().add_child(proj)
     
     var _ign = null
     
@@ -39,6 +41,8 @@ func on_cast(caster, position, direction, rune_chain_: RuneChain) -> bool:
     _ign = proj.connect("expired", self, "on_proj_expired")
 
     proj.on_fire(caster, cast_position + shift, cast_direction)
+
+    shared_proj.share()
     
     return true
 
