@@ -85,39 +85,36 @@ func stop():
 
 
 remote func on_hit(collision: KinematicCollision2D):
-    if is_network_master():
-        rpc("on_hit", collision)
-    else:
-        position = puppet_position
-
     emit_signal("hit", collision)
-    on_expire()
+
+    if is_network_master():
+        rpc("sync_force")
+        rpc("on_hit", collision)
 
 
 remote func on_hit_unit(unit: Unit):
-    if is_network_master():
-        rpc("on_hit_unit")
-    else:
-        position = puppet_position
-
     emit_signal("hit_unit", unit)
+
+    if is_network_master():
+        rpc("sync_force")
+        rpc("on_hit_unit")
 
 
 remote func on_lifetime_expire():
-    if is_network_master():
-        rpc("on_lifetime_expire")
-
     emit_signal("lifetime_expired")
-    on_expire()
+
+    if is_network_master():
+        rpc("sync_force")
+        rpc("on_lifetime_expire")
+        on_expire()
 
 
 remote func on_expire():
-#    if is_network_master():
-#        rpc("on_expire")
+    emit_signal("expired")
 
-    emit_signal("expired")    
     if is_network_master():
-        rpc("destroy")
+        rpc("sync_force")
+        rpc("on_expire")
 
 remotesync func destroy():
     queue_free()

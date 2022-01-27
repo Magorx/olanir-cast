@@ -79,5 +79,6 @@ radius = 200.0
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" parent="." index="1"]
+visible = false
 frames = SubResource( 2 )
 animation = "boom"

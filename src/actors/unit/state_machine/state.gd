@@ -26,7 +26,12 @@ func activate():
 
 
 func deactivate():
+    clean()
     executed = false
+
+
+func clean():
+    pass
 
 
 func can_proc_input() -> bool:
