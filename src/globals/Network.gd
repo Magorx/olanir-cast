@@ -6,6 +6,6 @@ const MAX_CLIENTS = 10
 
 
 func _ready():
-    pass
+	pass
 
 
