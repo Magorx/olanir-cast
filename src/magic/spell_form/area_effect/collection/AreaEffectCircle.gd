@@ -11,43 +11,43 @@ var spell: Spell
 
 
 func _ready():
-    scale.x = radius / $AnimatedSprite.frames.get_frame("default", 0).get_size().x
-    scale.y = scale.x
-    
-    spell = Spell.new()
-    spell.add_rune(RuneSpawnProjectile.new().set_projectile_type(energy_bolt))
+	scale.x = radius / $AnimatedSprite.frames.get_frame("default", 0).get_size().x
+	scale.y = scale.x
+	
+	spell = Spell.new()
+	spell.add_rune(RuneSpawnProjectile.new().set_projectile_type(energy_bolt))
 
 
 func on_appear(caster, pos, dir):
-    $AnimatedSprite.play("boom")
-    .on_appear(caster, pos, dir)
+	$AnimatedSprite.play("boom")
+	.on_appear(caster, pos, dir)
 
 
 func on_effect_tick():
-    var bodies = get_overlapping_bodies()
-    for body in bodies:
-        if body is Unit:
-            var unit: Unit = body as Unit
-            if (not caster_team_affected) and unit.same_team(caster):
-                continue
-            
-            var dir = unit.position - position
-            dir = dir.normalized()
+	var bodies = get_overlapping_bodies()
+	for body in bodies:
+		if body is Unit:
+			var unit: Unit = body as Unit
+			if (not caster_team_affected) and unit.same_team(caster):
+				continue
+			
+			var dir = unit.position - position
+			dir = dir.normalized()
 
-            if body.active:
-                body.velocity += dir * 64 * 25
-            
-            if body is Creature:
-                body.set_state("move")
-                
-                body.deal_damage(Damage.new(Damage.Type.fire, 58))
+			if body.active:
+				body.velocity += dir * 64 * 25
+			
+			if body is Creature:
+				body.set_state("move")
+				
+				body.deal_damage(Damage.new(Damage.Type.fire, 58))
 
-    .on_effect_tick()
+	.on_effect_tick()
 
 
 func on_expire():
-    yield($AnimatedSprite, "animation_finished")
-    .on_expire()
+	yield($AnimatedSprite, "animation_finished")
+	.on_expire()
 
 
 #func on_unit_enter(unit: Unit):
