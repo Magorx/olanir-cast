@@ -41,10 +41,10 @@ func execute(delta):
     
     .execute(delta)
     
-    unit.face_towards_velocity()
-    
     cur_target_velocity = max_velocity * unit.input_velocity
     unit.set_velocity(lerp(attack_start_velocity, cur_target_velocity, linear_coef_formula(1 - timer.time_left / move_attack_time)), true)
+    
+    unit.face_towards_velocity(cur_target_velocity)
 
 
 func linear_coef_formula(t):

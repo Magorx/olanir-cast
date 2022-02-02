@@ -1,12 +1,11 @@
 extends Creature
 
 
-const energy_bolt = preload("res://magic/spell_form/projectile/collection/EnergyBalt.tscn")
+const energy_bolt = "res://magic/spell_form/projectile/collection/EnergyBalt.tscn"
 const circle_area = preload("res://magic/spell_form/area_effect/collection/AreaEffectCircle.tscn")
 
 
 var spell: Spell
-var direction: Vector2
 
 
 func _ready():
@@ -16,14 +15,16 @@ func _ready():
 	spell.add_rune(RuneSpawnAreaEffect.new().set_area_type(circle_area))
 
 
-func _process(_delta):
-	direction = (get_global_mouse_position() - position).normalized()
-
-
 func process_input():
-	.process_input()
-	
-	if Input.is_action_pressed("primary_cast"):
-		if $ReloadTimer.is_stopped() and cur_state.can_cast():
-			var __ = spell.cast(self, position, direction)
-			$ReloadTimer.start()
+    .process_input()
+    
+    if Input.is_action_pressed("primary_cast"):
+        if $ReloadTimer.is_stopped() and cur_state.can_cast():
+            rpc("sync_force")
+            rpc("cast_spell", position, direction)
+            $ReloadTimer.start()
+
+
+remotesync func cast_spell(position_, direction_):
+#	var caster = get_tree().root.get_node(caster_path)
+    var __ = spell.cast(self, position_, direction_)

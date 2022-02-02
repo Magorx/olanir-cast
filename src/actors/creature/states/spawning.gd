@@ -14,6 +14,7 @@ func execute(_delta):
         
         unit.is_alive = true
         unit.visible = true
+        unit.get_node("CollisionShape2D").set_deferred("disabled", true)
         
         unit.emit_signal("spawn")
         
@@ -23,7 +24,7 @@ func execute(_delta):
 
 
 func next_state():
-    unit.get_node("AnimatedSprite").disconnect("animation_finished", self, "next_state")
+    clean()
 
     unit.get_node("CollisionShape2D").set_deferred("disabled", false)
     
@@ -32,6 +33,13 @@ func next_state():
     stats.mp = 0
 
     set_state.call_func("idle")
+
+
+func clean():
+    if executed:
+        unit.get_node("AnimatedSprite").disconnect("animation_finished", self, "next_state")
+    
+    executed = false
 
 
 func can_proc_input() -> bool:

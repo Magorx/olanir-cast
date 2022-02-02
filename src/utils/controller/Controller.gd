@@ -6,7 +6,7 @@ class_name Controller
 
 var controlled: Unit
 
-var active: bool = true
+var active: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,6 +30,11 @@ func _physics_process(_delta):
 
 func set_controlled(unit: Unit):
     controlled = unit
+
+
+func clear_controlled():
+    controlled = null
+    active = false
 
 
 func activate():

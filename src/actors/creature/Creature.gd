@@ -21,20 +21,20 @@ func _ready():
 
 
 func _physics_process(_delta):
-#    print("creat ", self, " ", position, " vel ", velocity)
     var __ = move_and_slide(velocity)
 
 
 func init_states():
     .init_states()
 
-    states["idle"]          = CreatureStateIdle         .new(self, funcref(self, "set_state"))
-    states["move"]          = CreatureStateMove         .new(self, funcref(self, "set_state"))
-    states["move_release"]  = CreatureStateMoveRelease  .new(self, funcref(self, "set_state"))
-    states["move_attack"]   = CreatureStateMoveAttack   .new(self, funcref(self, "set_state"))
-    states["dying"]         = CreatureStateDying        .new(self, funcref(self, "set_state"))
-    states["dead"]          = CreatureStateDead         .new(self, funcref(self, "set_state"))
-    states["spawning"]      = CreatureStateSpawning     .new(self, funcref(self, "set_state"))
+    states["idle"]           = CreatureStateIdle         .new(self, funcref(self, "set_state"))
+    states["move"]           = CreatureStateMove         .new(self, funcref(self, "set_state"))
+    states["move_release"]   = CreatureStateMoveRelease  .new(self, funcref(self, "set_state"))
+    states["move_attack"]    = CreatureStateMoveAttack   .new(self, funcref(self, "set_state"))
+    states["dying"]          = CreatureStateDying        .new(self, funcref(self, "set_state"))
+    states["dead"]           = CreatureStateDead         .new(self, funcref(self, "set_state"))
+    states["spawning"]       = CreatureStateSpawning     .new(self, funcref(self, "set_state"))
+    states["ready_to_spawn"] = CreatureStateReadyToSpawn .new(self, funcref(self, "set_state"))
 
     set_state("idle")
 
@@ -56,4 +56,3 @@ func deal_damage(damage: Damage):
     
     if $Stats.hp <= 0:
         set_state("dying")
-

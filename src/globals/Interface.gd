@@ -17,7 +17,7 @@ var preloaded = {
 
 
 func _ready():
-	switch_to("matchmaking")
+    switch_to("matchmaking")
 
 
 
