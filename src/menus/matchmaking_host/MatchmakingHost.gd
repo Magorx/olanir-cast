@@ -2,7 +2,7 @@ extends TemplateMenu
 
 
 func _ready():
-    pass
+	pass
 
 
 func _on_CreateServerButton_pressed():

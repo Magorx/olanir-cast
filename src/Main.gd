@@ -6,4 +6,4 @@ var pk_arena1 = preload("res://collection/levels/Arena1.tscn")
 
 
 func _ready():
-    randomize()
+	randomize()
