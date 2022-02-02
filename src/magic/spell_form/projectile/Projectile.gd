@@ -33,18 +33,18 @@ func init_states():
 
 
 func _process(_delta):
-    if is_network_master():
-        look_at(position + velocity)
-    else:
-        look_at(puppet_position + puppet_velocity)
+#    if is_network_master():
+    look_at(position + velocity)
+#    else:
+#        look_at(puppet_position + puppet_velocity)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
     var collision = move_and_collide(velocity * delta)
     
-    if not is_network_master():
-        return
+#    if not is_network_master():
+#        return
 
     if collision:
         if collision is Unit:
@@ -87,34 +87,33 @@ func stop():
 remote func on_hit(collision: KinematicCollision2D):
     emit_signal("hit", collision)
 
-    if is_network_master():
-        rpc("sync_force")
-        rpc("on_hit", collision)
+#    if is_network_master():
+#        rpc("sync_force")
+#        rpc("on_hit", collision)
 
 
 remote func on_hit_unit(unit: Unit):
     emit_signal("hit_unit", unit)
 
-    if is_network_master():
-        rpc("sync_force")
-        rpc("on_hit_unit")
+#    if is_network_master():
+#        rpc("sync_force")
+#        rpc("on_hit_unit")
 
 
 remote func on_lifetime_expire():
     emit_signal("lifetime_expired")
 
-    if is_network_master():
-        rpc("sync_force")
-        rpc("on_lifetime_expire")
-        on_expire()
+#    if is_network_master():
+#        rpc("sync_force")
+#        rpc("on_lifetime_expire")
+    on_expire()
 
 
 remote func on_expire():
     emit_signal("expired")
-
-    if is_network_master():
-        rpc("sync_force")
-        rpc("on_expire")
+#    if is_network_master():
+#        rpc("sync_force")
+#        rpc("on_expire")
 
 remotesync func destroy():
     queue_free()

@@ -8,12 +8,11 @@ var active = true
 
 export var max_velocity: float = 10
 
-
 var velocity: Vector2 = Vector2(0, 0)
 remote var input_velocity: Vector2 = Vector2(0, 0)
 
 var last_tick_position: Vector2 = Vector2(0, 0)
-var actual_velocity: Vector2 = Vector2(0, 0)
+remote var actual_velocity: Vector2 = Vector2(0, 0)
 
 var is_trying_to_move: bool = false
 
@@ -29,12 +28,14 @@ var cur_state_name: String
 var shared: bool = false
 
 
+remote var mouse_position = Vector2(0, 0)
+var direction: Vector2
+
 # Network =
 
 remote var puppet_position = Vector2(0, 0) setget puppet_position_set
 remote var puppet_velocity = Vector2(0, 0) setget puppet_velocity_set
 remote var puppet_rotation = 0
-remote var puppet_mouse_position = Vector2(0, 0)
 
 onready var pos_tween = $PuppetPositionTween
 
@@ -53,20 +54,25 @@ func puppet_velocity_set(val):
     velocity = val
 
 
+func is_network_master():
+    return shared and .is_network_master()
+
+
 func network_tick_update():
     if is_network_master():
         rset_unreliable("puppet_position", position)
         rset_unreliable("puppet_velocity", velocity)
         rset_unreliable("puppet_rotation", rotation_degrees)
-        rset_unreliable("puppet_mouse_position", get_global_mouse_position())
+        rset_unreliable("mouse_position", get_global_mouse_position())
         rset_unreliable("input_velocity", input_velocity)
-#        rset_unreliable("face_right", face_right)
+        rset_unreliable("actual_velocity", actual_velocity)
 
 
 remote func sync_force():
     if not is_network_master():
-        position = puppet_position
         pos_tween.stop_all()
+
+        position = puppet_position
         velocity = puppet_velocity
         rotation_degrees = puppet_rotation
 
@@ -107,18 +113,23 @@ onready var animated_sprite = $AnimatedSprite
 
 func _process(delta):
     cur_state.execute(delta)
-    
+
     animated_sprite.set_flip_h(not face_right)
     
     is_trying_to_move = (input_velocity.x + input_velocity.y) != 0
+    
+    if is_network_master():
+        mouse_position = get_global_mouse_position()
+    direction = (mouse_position - position).normalized()
 
 
 func _physics_process(delta):
-    actual_velocity = (position - last_tick_position) / delta
-    last_tick_position = position
-    
-    if actual_velocity.length() < GameInfo.MIN_VELOCITY:
-        actual_velocity = Vector2(0, 0)
+    if is_network_master():
+        actual_velocity = (position - last_tick_position) / delta
+        last_tick_position = position
+        
+        if actual_velocity.length() < GameInfo.MIN_VELOCITY:
+            actual_velocity = Vector2(0, 0)
     
 #    rotation_degrees = lerp_angle(rotation_degrees, puppet_rotation, delta * 8)
 #
@@ -153,12 +164,7 @@ func face_towards(vector):
 
 
 func face_towards_mouse():
-    var to_mouse = Vector2(1, 0)
-    if is_network_master():
-        to_mouse = get_global_mouse_position() - position
-    else:
-        to_mouse = puppet_mouse_position - position
-    
+    var to_mouse = mouse_position - position    
     face_towards(to_mouse)
 
 

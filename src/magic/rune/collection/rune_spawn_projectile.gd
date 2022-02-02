@@ -42,7 +42,7 @@ func on_cast(caster, position, direction, rune_chain_: RuneChain) -> bool:
 
     proj.on_fire(caster, cast_position + shift, cast_direction)
 
-    shared_proj.share()
+#    shared_proj.share()
     
     return true
 
