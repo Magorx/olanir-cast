@@ -9,10 +9,10 @@ var spell: Spell
 
 
 func _ready():
-    spell = Spell.new()
-    spell.add_rune(RuneCastNext.new())
-    spell.add_rune(RuneSpawnTriggerProjectile.new().set_projectile_type(energy_bolt))
-    spell.add_rune(RuneSpawnAreaEffect.new().set_area_type(circle_area))
+	spell = Spell.new()
+	spell.add_rune(RuneCastNext.new())
+	spell.add_rune(RuneSpawnTriggerProjectile.new().set_projectile_type(energy_bolt))
+	spell.add_rune(RuneSpawnAreaEffect.new().set_area_type(circle_area))
 
 
 func process_input():
@@ -26,5 +26,5 @@ func process_input():
 
 
 remotesync func cast_spell(position_, direction_):
-#    var caster = get_tree().root.get_node(caster_path)
+#	var caster = get_tree().root.get_node(caster_path)
     var __ = spell.cast(self, position_, direction_)
