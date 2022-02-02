@@ -55,6 +55,11 @@ _global_script_classes=[ {
 "path": "res://actors/creature/states/move_release.gd"
 }, {
 "base": "UnitState",
+"class": "CreatureStateReadyToSpawn",
+"language": "GDScript",
+"path": "res://actors/creature/states/ready_to_spawn.gd"
+}, {
+"base": "UnitState",
 "class": "CreatureStateSpawning",
 "language": "GDScript",
 "path": "res://actors/creature/states/spawning.gd"
@@ -78,6 +83,11 @@ _global_script_classes=[ {
 "class": "Projectile",
 "language": "GDScript",
 "path": "res://magic/spell_form/projectile/Projectile.gd"
+}, {
+"base": "UnitState",
+"class": "ProjectileStateIdle",
+"language": "GDScript",
+"path": "res://magic/spell_form/projectile/states/idle.gd"
 }, {
 "base": "Reference",
 "class": "Rune",
@@ -144,11 +154,13 @@ _global_script_class_icons={
 "CreatureStateMove": "",
 "CreatureStateMoveAttack": "",
 "CreatureStateMoveRelease": "",
+"CreatureStateReadyToSpawn": "",
 "CreatureStateSpawning": "",
 "Damage": "",
 "DamageNumber": "",
 "Level": "",
 "Projectile": "",
+"ProjectileStateIdle": "",
 "Rune": "",
 "RuneCastNext": "",
 "RuneChain": "",

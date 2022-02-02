@@ -32,16 +32,11 @@ func execute(_delta):
 
 
 func next_state():
-    if (timer):
+    if timer:
         timer.queue_free()
         timer = null
     
-    var spawn_area = Game.get_current_level().get_random_spawn_area(unit.team)
-    if not spawn_area:
-        unit.queue_free()
-        return
-
-    spawn_area.spawn_creature(unit)
+    set_state.call_func("ready_to_spawn")
 
 
 func can_proc_input() -> bool:

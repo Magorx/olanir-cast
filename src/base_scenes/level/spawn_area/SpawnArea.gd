@@ -21,8 +21,6 @@ func get_fallback_point():
 
 func spawn_creature_final(point, creature: Creature):
     creature.position = point
-    print("point = ", point)
-    creature.set_state("spawning")
 
 
 func spawn_creature(creature):

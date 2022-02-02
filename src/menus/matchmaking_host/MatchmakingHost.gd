@@ -6,13 +6,16 @@ func _ready():
 
 
 func _on_CreateServerButton_pressed():
-	load_level($LevelNameLineEdit.text)
+	var port = $PortLineEdit.text
+	if port.is_valid_integer():
+		port = int(port)
+	else:
+		port = null
 
-
-func load_level(name):
-	var pk_level = load("res://collection/levels/" + name)
-
-	var __ = Game.load_level(pk_level)
-	Game.add_local_player()
-
+	Game.load_level($LevelNameLineEdit.text)
+	
+	Network.create_server(port)
+	
+	Game.set_local_player(Network.instance_player(get_tree().get_network_unique_id()))
+	
 	Interface.switch_to("ingame_hud")

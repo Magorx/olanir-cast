@@ -1,23 +1,24 @@
 extends Projectile
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-    pass # Replace with function body.
+    pass
 
 
-func on_fire(caster, position_ : Vector2, velocity_ : Vector2):
-    .on_fire(caster, position_, velocity_)
-    $AnimatedSprite.play("idle")
+func on_hit(collision):
+    .on_hit(collision)
+
+#    if is_network_master():
+    on_expire()
 
 
 func on_expire():
+    .on_expire()
+
     stop()
     $AnimatedSprite.play("boom")
     yield($AnimatedSprite, "animation_finished")
-    .on_expire()
+    
+#    if is_network_master():
+#        rpc("destroy")
+    destroy()

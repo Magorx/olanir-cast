@@ -1,6 +1,9 @@
 extends Node
 
 
+signal level_loaded
+
+
 var AVAILABLE_LIGHTNING_Z_INDEX = []
 
 var current_level: Level = null
@@ -14,6 +17,9 @@ var pk_wizard = preload("res://wizard.tscn")
 func _ready():
     for i in range(GameInfo.MIN_LIGHTNING_Z_INDEX, GameInfo.MAX_LIGHTNING_Z_INDEX):
         AVAILABLE_LIGHTNING_Z_INDEX.append(i)
+    
+    current_controller = load("res://utils/controller/Controller.tscn").instance()
+    add_child(current_controller)
 
 
 func get_lightning_z_index():
@@ -37,7 +43,18 @@ func get_current_level() -> Level:
     return current_level
 
 
-func load_level(level) -> Level:
+func load_level(name, to_add_extension=true):
+    name = "res://collection/levels/" + name
+    if to_add_extension:
+        name += GameInfo.LEVEL_EXTENSION
+
+    var pk_level = load(name)
+    var __ = set_level(pk_level)
+    
+    emit_signal("level_loaded")
+
+
+func set_level(level) -> Level:
     unload_current_level()
     
     if not level:
@@ -53,16 +70,20 @@ func load_level(level) -> Level:
 func unload_current_level():
     if not current_level:
         return
+        
+    current_controller.clear_controlled()
     
     current_level.queue_free()
     current_level = null
 
 
-func add_local_player(team=1):
-    if not current_level:
-        printerr("add_local_player is called when there is no loaded level")
-    
-    current_controller = current_level.add_controlled_creature(pk_wizard, team)
+func set_local_player(player):
+    if not current_controller:
+        printerr("Can't set local player: controller is null")
+        return
+
+    current_controller.set_controlled(player)
+    current_controller.activate()
 
 
 func get_current_controller() -> Controller:

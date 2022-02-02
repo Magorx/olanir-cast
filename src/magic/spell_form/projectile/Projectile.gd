@@ -19,19 +19,33 @@ var caster
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    deactivate()
+
     $ExpireTimer.set_wait_time(live_time)
     $ExpireTimer.start()
 
-    pass # Replace with function body.
+
+func init_states():
+    .init_states()
+    
+    states["idle"] = ProjectileStateIdle.new(self, funcref(self, "set_state"))
+    set_state("idle")
 
 
 func _process(_delta):
+#    if is_network_master():
     look_at(position + velocity)
+#    else:
+#        look_at(puppet_position + puppet_velocity)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
     var collision = move_and_collide(velocity * delta)
+    
+#    if not is_network_master():
+#        return
+
     if collision:
         if collision is Unit:
             on_hit_unit(collision.get_collider() as Unit)
@@ -39,41 +53,67 @@ func _physics_process(delta):
         on_hit(collision)
 
 
+func activate():
+    active = true
+    $CollisionShape2D.set_deferred("disabled", false)
+
+
+func deactivate():
+    velocity = Vector2(0, 0)
+    active = false
+    $CollisionShape2D.set_deferred("disabled", true)
+
+
 func on_fire(caster_, position_ : Vector2, direction : Vector2):
     caster = caster_
 
     position = position_
     velocity = direction.normalized() * max_velocity
+    actual_velocity = velocity
     look_at(position + velocity)
+    
+    activate()
+    
+    set_state("idle")
     
     emit_signal("fired")
 
 
 func stop():
     velocity = Vector2(0, 0)
-    active = false
-    $CollisionShape2D.set_deferred("disabled", true)
+    deactivate()
 
 
-func on_hit(collision: KinematicCollision2D):
+remote func on_hit(collision: KinematicCollision2D):
     emit_signal("hit", collision)
 
-    on_expire()
+#    if is_network_master():
+#        rpc("sync_force")
+#        rpc("on_hit", collision)
 
 
-func on_hit_unit(unit: Unit):
+remote func on_hit_unit(unit: Unit):
     emit_signal("hit_unit", unit)
 
-    on_expire()
+#    if is_network_master():
+#        rpc("sync_force")
+#        rpc("on_hit_unit")
 
 
-func on_lifetime_expire():
+remote func on_lifetime_expire():
     emit_signal("lifetime_expired")
 
+#    if is_network_master():
+#        rpc("sync_force")
+#        rpc("on_lifetime_expire")
     on_expire()
 
 
-func on_expire():
+remote func on_expire():
     emit_signal("expired")
+#    if is_network_master():
+#        rpc("sync_force")
+#        rpc("on_expire")
 
+remotesync func destroy():
     queue_free()

@@ -75,6 +75,8 @@ animations = [ {
 
 [node name="Wizard" instance=ExtResource( 1 )]
 script = ExtResource( 8 )
+max_velocity = null
+cast_radius = null
 respawnable = true
 
 [node name="CollisionShape2D" parent="." index="0"]
